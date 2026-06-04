@@ -18,7 +18,7 @@ import (
 	"github.com/matthewmcneely/modusgraph"
 	"github.com/matthewmcneely/modusgraph/typed"
 
-	telemetry "github.com/mlwelles/modusgraph-telemetry"
+	telemetry "github.com/mlwelles/modusGraph-telemetry"
 )
 
 // widget is a minimal schema struct used to exercise the typed client.

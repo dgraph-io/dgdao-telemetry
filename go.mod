@@ -1,4 +1,4 @@
-module github.com/mlwelles/modusgraph-telemetry
+module github.com/mlwelles/modusGraph-telemetry
 
 go 1.25.7
 

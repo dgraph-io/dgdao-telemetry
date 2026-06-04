@@ -1,7 +1,7 @@
-# modusgraph-telemetry
+# modusGraph-telemetry
 
 An OpenTelemetry-backed tracer for the
-[modusgraph](https://github.com/matthewmcneely/modusgraph) typed client. The typed
+[modusGraph](https://github.com/matthewmcneely/modusgraph) typed client. The typed
 client traces every database operation through a pluggable `typed.Tracer` (a no-op by
 default); this package provides the OpenTelemetry implementation.
 
@@ -14,7 +14,7 @@ must declare the same one:
 ```go
 // go.mod
 require (
-    github.com/mlwelles/modusgraph-telemetry v0.1.0
+    github.com/mlwelles/modusGraph-telemetry v0.1.0
     github.com/matthewmcneely/modusgraph v0.0.0-00010101000000-000000000000
 )
 
@@ -29,7 +29,7 @@ exporter:
 ```go
 import (
     "github.com/matthewmcneely/modusgraph/typed"
-    telemetry "github.com/mlwelles/modusgraph-telemetry"
+    telemetry "github.com/mlwelles/modusGraph-telemetry"
 )
 
 func main() {

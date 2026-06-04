@@ -25,7 +25,7 @@ import (
 )
 
 // tracerName is the instrumentation scope for typed-layer DB spans.
-const tracerName = "github.com/mlwelles/modusgraph-telemetry"
+const tracerName = "github.com/mlwelles/modusGraph-telemetry"
 
 // New returns a typed.Tracer backed by the global OpenTelemetry tracer provider.
 func New() typed.Tracer { return otelTracer{} }
