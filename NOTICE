@@ -1,10 +1,9 @@
-modusgraph-telemetry
+dgdao-telemetry
 Copyright 2017-2026 Istari Digital, Inc.
 
-This product includes software developed as part of modusGraph
-(https://github.com/matthewmcneely/modusgraph), licensed under the Apache
+This product includes software developed as part of dgdao
+(https://github.com/dgraph-io/dgdao), licensed under the Apache
 License, Version 2.0.
 
-The OpenTelemetry tracer in this repository was extracted from a fork of
-modusGraph (https://github.com/mlwelles/modusGraph) and retains its original
+The OpenTelemetry tracer in this repository was extracted from dgdao (https://github.com/dgraph-io/dgdao) and retains its original
 copyright and license.

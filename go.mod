@@ -3,7 +3,7 @@ module github.com/dgraph-io/dgdao-telemetry
 go 1.26.4
 
 require (
-	github.com/dgraph-io/dgdao v0.5.3-0.20260707184702-7f51c740c7a8
+	github.com/dgraph-io/dgdao v0.5.3
 	go.opentelemetry.io/otel v1.44.0
 	go.opentelemetry.io/otel/sdk v1.44.0
 	go.opentelemetry.io/otel/trace v1.44.0

@@ -7,7 +7,7 @@ All notable changes to this project are documented here. The format follows
 
 ### Added
 
-- Initial release: an OpenTelemetry-backed `typed.Tracer` for the modusgraph typed
-  client, extracted from the fork's `typed/otel.go`. Emits `modusgraph.<op>` client
+- Initial release: an OpenTelemetry-backed `typed.Tracer` for the dgdao typed
+  client, extracted from dgdao's `typed/otel.go`. Emits `dgdao.<op>` client
   spans with Dgraph database semantic attributes. Install with
   `typed.SetTracer(telemetry.New())`.
