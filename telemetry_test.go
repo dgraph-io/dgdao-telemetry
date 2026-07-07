@@ -15,10 +15,10 @@ import (
 	"go.opentelemetry.io/otel/sdk/trace/tracetest"
 	noop "go.opentelemetry.io/otel/trace/noop"
 
-	"github.com/matthewmcneely/modusgraph"
-	"github.com/matthewmcneely/modusgraph/typed"
+	"github.com/dgraph-io/dgdao"
+	"github.com/dgraph-io/dgdao/typed"
 
-	telemetry "github.com/mlwelles/modusGraph-telemetry"
+	telemetry "github.com/dgraph-io/dgdao-telemetry"
 )
 
 // widget is a minimal schema struct used to exercise the typed client.
@@ -29,11 +29,11 @@ type widget struct {
 	Qty   int      `json:"qty,omitempty" dgraph:"index=int"`
 }
 
-func newConn(t *testing.T) modusgraph.Client {
+func newConn(t *testing.T) dgdao.Client {
 	t.Helper()
-	conn, err := modusgraph.NewClient("file://"+t.TempDir(), modusgraph.WithAutoSchema(true))
+	conn, err := dgdao.NewClient("file://"+t.TempDir(), dgdao.WithAutoSchema(true))
 	if err != nil {
-		t.Fatalf("modusgraph.NewClient: %v", err)
+		t.Fatalf("dgdao.NewClient: %v", err)
 	}
 	t.Cleanup(conn.Close)
 	return conn
@@ -77,10 +77,10 @@ func TestClient_CRUD_EmitsSpans(t *testing.T) {
 
 	var wantAdd, wantGet bool
 	for _, n := range spanNames(sr) {
-		if n == "modusgraph.add" {
+		if n == "dgdao.add" {
 			wantAdd = true
 		}
-		if n == "modusgraph.get" {
+		if n == "dgdao.get" {
 			wantGet = true
 		}
 	}
@@ -89,7 +89,7 @@ func TestClient_CRUD_EmitsSpans(t *testing.T) {
 	}
 
 	for _, s := range sr.Ended() {
-		if s.Name() != "modusgraph.get" {
+		if s.Name() != "dgdao.get" {
 			continue
 		}
 		attrs := map[string]string{}
@@ -125,12 +125,12 @@ func TestQuery_Terminals_EmitSpans(t *testing.T) {
 
 	var querySpans int
 	for _, s := range sr.Ended() {
-		if s.Name() == "modusgraph.query" {
+		if s.Name() == "dgdao.query" {
 			querySpans++
 		}
 	}
 	if querySpans < 2 {
-		t.Fatalf("want >=2 modusgraph.query spans, got %d (%v)", querySpans, spanNames(sr))
+		t.Fatalf("want >=2 dgdao.query spans, got %d (%v)", querySpans, spanNames(sr))
 	}
 }
 
@@ -162,12 +162,12 @@ func TestIterNodes_EmitsSpan(t *testing.T) {
 
 	var querySpans int
 	for _, s := range sr.Ended() {
-		if s.Name() == "modusgraph.query" {
+		if s.Name() == "dgdao.query" {
 			querySpans++
 		}
 	}
 	if querySpans < 1 {
-		t.Fatalf("want >=1 modusgraph.query span after IterNodes, got %d (%v)", querySpans, spanNames(sr))
+		t.Fatalf("want >=1 dgdao.query span after IterNodes, got %d (%v)", querySpans, spanNames(sr))
 	}
 }
 
@@ -184,15 +184,15 @@ func TestSpan_RecordsErrorStatus(t *testing.T) {
 
 	var found bool
 	for _, s := range sr.Ended() {
-		if s.Name() != "modusgraph.get" {
+		if s.Name() != "dgdao.get" {
 			continue
 		}
 		found = true
 		if got := s.Status().Code; got != codes.Error {
-			t.Errorf("modusgraph.get span status code = %v, want Error", got)
+			t.Errorf("dgdao.get span status code = %v, want Error", got)
 		}
 	}
 	if !found {
-		t.Fatalf("no modusgraph.get span recorded; got %v", spanNames(sr))
+		t.Fatalf("no dgdao.get span recorded; got %v", spanNames(sr))
 	}
 }

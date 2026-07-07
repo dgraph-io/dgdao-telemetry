@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// Package telemetry provides an OpenTelemetry-backed tracer for the modusgraph
+// Package telemetry provides an OpenTelemetry-backed tracer for the dgdao
 // typed client. The typed client traces every database operation through a
 // pluggable typed.Tracer; install this implementation once at startup:
 //
@@ -21,21 +21,21 @@ import (
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
 
-	"github.com/matthewmcneely/modusgraph/typed"
+	"github.com/dgraph-io/dgdao/typed"
 )
 
 // tracerName is the instrumentation scope for typed-layer DB spans.
-const tracerName = "github.com/mlwelles/modusGraph-telemetry"
+const tracerName = "github.com/dgraph-io/dgdao-telemetry"
 
 // New returns a typed.Tracer backed by the global OpenTelemetry tracer provider.
 func New() typed.Tracer { return otelTracer{} }
 
 type otelTracer struct{}
 
-// StartSpan opens a span named "modusgraph.<op>" carrying the Dgraph database
+// StartSpan opens a span named "dgdao.<op>" carrying the Dgraph database
 // semantic attributes db.system, db.operation.name, and db.collection.name.
 func (otelTracer) StartSpan(ctx context.Context, op, collection string) (context.Context, typed.Span) {
-	ctx, span := otel.Tracer(tracerName).Start(ctx, "modusgraph."+op,
+	ctx, span := otel.Tracer(tracerName).Start(ctx, "dgdao."+op,
 		trace.WithSpanKind(trace.SpanKindClient),
 		trace.WithAttributes(
 			attribute.String("db.system", "dgraph"),
