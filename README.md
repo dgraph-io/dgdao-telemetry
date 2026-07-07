@@ -1,24 +1,14 @@
-# modusGraph-telemetry
+# dgdao-telemetry
 
 An OpenTelemetry-backed tracer for the
-[modusGraph](https://github.com/matthewmcneely/modusgraph) typed client. The typed
+[dgdao](https://github.com/dgraph-io/dgdao) typed client. The typed
 client traces every database operation through a pluggable `typed.Tracer` (a no-op by
 default); this package provides the OpenTelemetry implementation.
 
 ## Install
 
-`modusgraph-telemetry` depends on a fork of modusGraph published under a different
-import path. Go does not propagate `replace` directives to consumers, so your project
-must declare the same one:
-
-```go
-// go.mod
-require (
-    github.com/mlwelles/modusGraph-telemetry v0.1.0
-    github.com/matthewmcneely/modusgraph v0.0.0-00010101000000-000000000000
-)
-
-replace github.com/matthewmcneely/modusgraph => github.com/mlwelles/modusGraph v0.5.0-dev-mlwelles-20260604c
+```
+go get github.com/dgraph-io/dgdao-telemetry
 ```
 
 ## Usage
@@ -28,8 +18,8 @@ exporter:
 
 ```go
 import (
-    "github.com/matthewmcneely/modusgraph/typed"
-    telemetry "github.com/mlwelles/modusGraph-telemetry"
+    "github.com/dgraph-io/dgdao/typed"
+    telemetry "github.com/dgraph-io/dgdao-telemetry"
 )
 
 func main() {
@@ -38,7 +28,7 @@ func main() {
 }
 ```
 
-Each typed database operation then emits a `modusgraph.<op>` client span carrying the
+Each typed database operation then emits a `dgdao.<op>` client span carrying the
 Dgraph database semantic attributes `db.system=dgraph`, `db.operation.name`, and
 `db.collection.name`. With no SDK installed in the process the spans are no-ops.
 
