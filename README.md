@@ -32,6 +32,14 @@ Each typed database operation then emits a `dgdao.<op>` client span carrying the
 Dgraph database semantic attributes `db.system=dgraph`, `db.operation.name`, and
 `db.collection.name`. With no SDK installed in the process the spans are no-ops.
 
+## Related projects
+
+Part of the [dgdao](https://github.com/dgraph-io/dgdao) family:
+
+- [dgdao](https://github.com/dgraph-io/dgdao) — core typed client and DAO library for Dgraph
+- [dgdao-gen](https://github.com/dgraph-io/dgdao-gen) — code generator and wrapper-entity runtime
+- [dgdao-migrate](https://github.com/dgraph-io/dgdao-migrate) — struct-first schema migration framework for Dgraph
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
