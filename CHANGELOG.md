@@ -3,6 +3,12 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.3] - 2026-07-17
+
+### Changed
+
+- chore(deps): bump the `github.com/dgraph-io/dgdao` dependency to v0.8.0.
+
 ## [0.2.2] - 2026-07-16
 
 ### Changed
