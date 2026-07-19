@@ -3,6 +3,14 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.4] - 2026-07-19
+
+### Changed
+
+- Bump the `github.com/dgraph-io/dgdao` dependency to v0.9.0. The typed client's `Add` is
+  now `Insert`, so the emitted span name follows (`dgdao.insert`); no change to the tracer
+  implementation itself.
+
 ## [0.2.3] - 2026-07-17
 
 ### Changed

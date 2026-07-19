@@ -68,23 +68,23 @@ func TestClient_CRUD_EmitsSpans(t *testing.T) {
 	c := typed.NewClient[widget](newConn(t))
 
 	w := &widget{Name: "sprocket", Qty: 1}
-	if err := c.Add(ctx, w); err != nil {
-		t.Fatalf("Add: %v", err)
+	if err := c.Insert(ctx, w); err != nil {
+		t.Fatalf("Insert: %v", err)
 	}
 	if _, err := c.Get(ctx, w.UID); err != nil {
 		t.Fatalf("Get: %v", err)
 	}
 
-	var wantAdd, wantGet bool
+	var wantInsert, wantGet bool
 	for _, n := range spanNames(sr) {
-		if n == "dgdao.add" {
-			wantAdd = true
+		if n == "dgdao.insert" {
+			wantInsert = true
 		}
 		if n == "dgdao.get" {
 			wantGet = true
 		}
 	}
-	if !wantAdd || !wantGet {
+	if !wantInsert || !wantGet {
 		t.Fatalf("missing CRUD spans; got %v", spanNames(sr))
 	}
 
@@ -112,8 +112,8 @@ func TestQuery_Terminals_EmitSpans(t *testing.T) {
 	sr := recordSpans(t)
 	ctx := context.Background()
 	c := typed.NewClient[widget](newConn(t))
-	if err := c.Add(ctx, &widget{Name: "a", Qty: 1}); err != nil {
-		t.Fatalf("Add: %v", err)
+	if err := c.Insert(ctx, &widget{Name: "a", Qty: 1}); err != nil {
+		t.Fatalf("Insert: %v", err)
 	}
 
 	if _, err := c.Query(ctx).Nodes(); err != nil {
@@ -139,7 +139,7 @@ func TestIterNodes_EmitsSpan(t *testing.T) {
 	ctx := context.Background()
 	c := typed.NewClient[widget](newConn(t))
 	for i := range 3 {
-		if err := c.Add(ctx, &widget{Name: "w", Qty: i}); err != nil {
+		if err := c.Insert(ctx, &widget{Name: "w", Qty: i}); err != nil {
 			t.Fatalf("Add %d: %v", i, err)
 		}
 	}
